@@ -4,32 +4,44 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.green.shade100.withOpacity(0.1),
+      backgroundColor: Colors.green.withOpacity(0.5),
       title: const Text('J A B A S E E L A N   S'),
       actions: [
         TextButton(
           onPressed: () {
             Navigator.pushNamed(context, '/');
           },
-          child: const Text('Home'),
+          child: Text(
+            'Home',
+            style: TextStyle(color: Colors.white.withOpacity(0.8)),
+          ),
         ),
         TextButton(
           onPressed: () {
             Navigator.pushNamed(context, '/about');
           },
-          child: const Text('About'),
+          child: Text(
+            'About',
+            style: TextStyle(color: Colors.white.withOpacity(0.8)),
+          ),
         ),
         TextButton(
           onPressed: () {
             Navigator.pushNamed(context, '/projects');
           },
-          child: const Text('Projects'),
+          child: Text(
+            'Projects',
+            style: TextStyle(color: Colors.white.withOpacity(0.8)),
+          ),
         ),
         TextButton(
           onPressed: () {
             Navigator.pushNamed(context, '/contact');
           },
-          child: const Text('Contact'),
+          child: Text(
+            'Contact',
+            style: TextStyle(color: Colors.white.withOpacity(0.8)),
+          ),
         ),
       ],
     );

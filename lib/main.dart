@@ -24,10 +24,19 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Developer Portfolio',
         theme: ThemeData(
-          appBarTheme:
-              const AppBarTheme(titleTextStyle: TextStyle(color: Colors.white)),
+          appBarTheme: AppBarTheme(
+              titleTextStyle: TextStyle(color: Colors.white.withOpacity(0.8))),
           textTheme: TextTheme(
-            bodyMedium: TextStyle(color: Colors.white.withOpacity(0.8)),
+            bodyMedium: TextStyle(
+              color: Colors.white.withOpacity(0.8),
+              shadows: [
+                Shadow(
+                  color: Colors.black.withOpacity(0.6),
+                  offset: const Offset(1, 1),
+                  blurRadius: 10,
+                ),
+              ],
+            ),
           ),
           pageTransitionsTheme: const PageTransitionsTheme(
               builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -35,7 +44,6 @@ class MyApp extends StatelessWidget {
                 TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
               }),
           primarySwatch: Colors.green,
-          // scaffoldBackgroundColor: Colors.lightGreen[200],
           scaffoldBackgroundColor: Colors.transparent,
         ),
         initialRoute: '/',
