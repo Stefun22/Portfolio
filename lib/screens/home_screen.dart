@@ -35,8 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           image: DecorationImage(
               fit: BoxFit.cover,
               filterQuality: FilterQuality.low,
-              image: AssetImage("assets/bgImage.jpeg"))),
-      // image: NetworkImage("assets/sample.gif"))),
+              image: AssetImage("assets/sample 2.png"))),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
         child: Scaffold(

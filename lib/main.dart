@@ -73,6 +73,7 @@ extension DoubleExtension on int {
 
     double adjustedFontSize = interpolate(screenWidth, toDouble());
 
-    return adjustedFontSize;
+    // return adjustedFontSize;
+    return this.toDouble();
   }
 }
