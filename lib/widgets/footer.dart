@@ -14,7 +14,7 @@ class Footer extends StatelessWidget {
             children: [
               const Text('Follow me on social media:'),
               IconButton(
-                icon: const Icon(Icons.facebook),
+                icon: const Icon(Icons.whatshot_sharp),
                 onPressed: () {},
               ),
               IconButton(
