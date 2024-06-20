@@ -51,7 +51,7 @@ class Constants {
       "data":
           "Experienced in integrating Jitsi for seamless video conferencing capabilities within mobile applications.",
       "image":
-          "https://cdn.icon-icons.com/icons2/1381/PNG/512/jitsi_94722.png  ",
+          "https://jitsi.org/wp-content/themes/jitsi/images/logo-web-2020.png",
     },
     {
       "name": "State Management",
