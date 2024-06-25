@@ -1,35 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_stefun_1/extensions.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20.0),
-      color: Colors.green.shade100.withOpacity(0.1),
+      color: Colors.green.withOpacity(0.5),
       child: Column(
         children: [
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Follow me on social media:'),
-              IconButton(
-                icon: const Icon(Icons.whatshot_sharp),
-                onPressed: () {},
+              const Text(
+                'Follow me on social media :',
+                style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
               ),
               IconButton(
-                icon: const Icon(Icons.whatshot_sharp),
-                onPressed: () {},
+                icon: networkImage(
+                    "https://cdn-icons-png.flaticon.com/128/1384/1384014.png"),
+                onPressed: () async {
+                  await launchUrl(
+                      "https://www.linkedin.com/in/stefun-s-2a6975228".toUri());
+                },
               ),
               IconButton(
-                icon: const Icon(Icons.link),
-                onPressed: () {},
+                icon: networkImage(
+                    "https://cdn-icons-png.flaticon.com/128/1384/1384007.png"),
+                onPressed: () async {
+                  await launchUrl("https://wa.me/919790164675".toUri());
+                },
               ),
-              // Add more social media icons here
+              IconButton(
+                icon: networkImage(
+                    "https://cdn-icons-png.flaticon.com/128/1384/1384015.png"),
+                onPressed: () async {
+                  await launchUrl(
+                      "https://www.instagram.com/s_t_e_f_u_n/".toUri());
+                },
+              ),
             ],
           ),
         ],
       ),
     );
   }
+
+  Widget networkImage(String url) {
+    return cricleBorder(Image.network(
+      url,
+      height: 50,
+      fit: BoxFit.cover,
+      width: 50,
+    ));
+  }
+
+  Widget cricleBorder(Widget widget) => Material(
+        elevation: 18.0,
+        shape: const CircleBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: widget,
+      );
 }

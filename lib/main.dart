@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Developer Portfolio',
+        title: 'J A B A S E E L A N',
         theme: ThemeData(
           appBarTheme: AppBarTheme(
               titleTextStyle: TextStyle(color: Colors.white.withOpacity(0.8))),
@@ -39,16 +39,17 @@ class MyApp extends StatelessWidget {
             ),
           ),
           pageTransitionsTheme: const PageTransitionsTheme(
-              builders: <TargetPlatform, PageTransitionsBuilder>{
-                TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-                TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
-              }),
+            builders: <TargetPlatform, PageTransitionsBuilder>{
+              TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
+              TargetPlatform.windows: OpenUpwardsPageTransitionsBuilder(),
+            },
+          ),
           primarySwatch: Colors.green,
-          scaffoldBackgroundColor: Colors.transparent,
+          scaffoldBackgroundColor: Colors.black,
         ),
-        initialRoute: '/',
+        initialRoute: '/home',
         routes: {
-          '/': (context) => HomeScreen(),
+          '/home': (context) => HomeScreen(),
           '/about': (context) => AboutScreen(),
           '/projects': (context) => ProjectsScreen(),
           '/contact': (context) => ContactScreen(),
@@ -74,6 +75,6 @@ extension DoubleExtension on int {
     double adjustedFontSize = interpolate(screenWidth, toDouble());
 
     // return adjustedFontSize;
-    return this.toDouble();
+    return toDouble();
   }
 }

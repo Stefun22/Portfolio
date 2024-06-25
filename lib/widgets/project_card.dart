@@ -9,13 +9,23 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 10.0),
-      child: ListTile(
-        leading: Image.network(project.imageUrl),
-        title: Text(project.title),
-        subtitle: Text(project.description),
-      ),
-    );
+    return LayoutBuilder(builder: (context, c) {
+      if (c.maxWidth < 900) {
+        return Card(
+            margin: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Row(
+              children: [
+                SizedBox(width: 100, child: Image.network(project.imageUrl))
+              ],
+            ));
+      }
+      return Card(
+          margin: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Row(
+            children: [
+              SizedBox(width: 500, child: Image.network(project.imageUrl))
+            ],
+          ));
+    });
   }
 }

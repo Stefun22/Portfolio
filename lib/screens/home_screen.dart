@@ -1,12 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:portfolio_stefun_1/constants.dart';
 import 'package:portfolio_stefun_1/main.dart';
+import 'package:portfolio_stefun_1/models/project.dart';
+import 'package:portfolio_stefun_1/widgets/project_card.dart';
 
-import '../widgets/nav_bar.dart';
+import '../widgets/footer.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -29,20 +30,57 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  Map<String, GlobalKey> keyForFrames = {
+    "Home": GlobalKey(),
+    "Projects": GlobalKey(),
+    "Contact": GlobalKey()
+  };
+  static List<String> navBarContents = ["Home", "Projects", "Contact"];
+  String selectedTile = "Home";
   @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      child: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                filterQuality: FilterQuality.low,
-                image: MemoryImage(base64.decode(Constants.bgimagesample)))),
+      child: SizedBox(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
           child: Scaffold(
-            appBar: NavBar(),
+            appBar: AppBar(
+              backgroundColor: Colors.green.withOpacity(0.5),
+              automaticallyImplyLeading: false,
+              title: const Text(
+                'J A B A S E E L A N   S',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+              actions: navBarContents.map((e) {
+                bool selected = e == selectedTile;
+                return TextButton(
+                  style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(selected
+                          ? Colors.green.withOpacity(0.3)
+                          : Colors.transparent)),
+                  onPressed: () {
+                    selectedTile = e;
+                    RenderObject? renderObject =
+                        keyForFrames[e]!.currentContext!.findRenderObject();
+                    renderObject!.showOnScreen(
+                        duration: const Duration(seconds: 2),
+                        curve: Curves.fastOutSlowIn);
+                    setState(() {});
+                  },
+                  child: Text(
+                    e,
+                    style: TextStyle(
+                        color: Colors.black.withOpacity(0.8),
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.5),
+                  ),
+                );
+              }).toList(),
+            ),
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -51,14 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Welcome to My Portfolio',
-                            style: TextStyle(
-                                fontSize: 30.adjust(),
-                                color: Colors.pink,
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.bold)),
-                        SizedBox(height: Sizes.width * 0.02),
                         Text('Personal Introduction : ',
+                            key: keyForFrames["Home"],
                             style: TextStyle(
                                 fontSize: 22.adjust(),
                                 fontWeight: FontWeight.bold)),
@@ -67,7 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           '   Hi, I\'m Jabaseelan, a passionate Flutter developer with a keen eye for detail and a strong commitment to creating high-quality mobile applications. With a background in computer science and over 3 years of professional experience, I specialize in building cross-platform apps that are both functional and visually appealing.',
                           style: TextStyle(fontSize: 18.adjust()),
                         ),
-                        SizedBox(height: Sizes.width * 0.02),
+                        SizedBox(
+                            key: keyForFrames["About"],
+                            height: Sizes.width * 0.02),
                         Text('Professional Summary : ',
                             style: TextStyle(
                                 fontSize: 22.adjust(),
@@ -180,8 +214,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   Align(
                                                     alignment: Alignment.center,
                                                     child: SizedBox(
-                                                      height: Sizes.width / 10,
-                                                      width: Sizes.width / 10,
+                                                      height: Sizes.width / 13,
+                                                      width: Sizes.width / 13,
                                                       child: Image.network(
                                                           e["image"]!),
                                                     ),
@@ -190,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   Text(
                                                     e["data"]!,
                                                     style: TextStyle(
-                                                        fontSize: 12.adjust()),
+                                                        fontSize: 16.adjust()),
                                                   ),
                                                 ]),
                                           ),
@@ -283,8 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           }
                           return SizedBox(
-                            // width: Sizes.width,
-                            height: Sizes.width / 3.8,
+                            height: Sizes.height / 2.3,
                             child: PageView.builder(
                                 controller: pgCont,
                                 scrollDirection: Axis.horizontal,
@@ -307,8 +340,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
-                                            child: Container(
+                                            child: SizedBox(
                                               width: Sizes.width / 3.5,
+
                                               // height: Sizes.width / 5,
                                               child: Column(children: [
                                                 SizedBox(
@@ -349,11 +383,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }),
                         SizedBox(height: Sizes.width * 0.02),
+                        Column(
+                          key: keyForFrames["Projects"],
+                          children: List.generate(1, (index) {
+                            return ProjectCard(
+                                project: Project(
+                                    title: "hCare",
+                                    description:
+                                        "The app features a video call capability for connecting with doctors and tracks vital health data using Google Fit to keep users informed about their health status.",
+                                    imageUrl:
+                                        "https://play-lh.googleusercontent.com/kpTjZLJOguUyvBogc-CEckXoUhhqVjefrG3bwqSbVGlgIY_zwqLg1ielLwkG9tkeleo=w240-h480-rw"));
+                          }),
+                        )
                       ],
                     ),
                   ),
                   const SizedBox(width: 20),
-                  // Footer(),
+                  SizedBox(
+                    key: keyForFrames["Contact"],
+                    child: Footer(),
+                  ),
                 ],
               ),
             ),

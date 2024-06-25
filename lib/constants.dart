@@ -2,7 +2,7 @@ class Constants {
   static const List<Map<String, dynamic>> technical_skills = [
     {
       "category": "Programming Languages",
-      "skills": ["Python", "Java", "Dart", "HTML", "CSS"]
+      "skills": ["Dart", "Python", "Java", "HTML", "CSS"]
     },
     {
       "category": "Frameworks",
