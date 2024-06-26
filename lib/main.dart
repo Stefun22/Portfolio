@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,7 +9,16 @@ import 'screens/contact_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/projects_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyDViysi3SlTBgHOR8_XusyGvQTIWc4UJcs",
+          appId: "1:262726156960:web:e41c4f4d3404ed143affc5",
+          messagingSenderId: "262726156960",
+          storageBucket: "gs://jabaseelan-portfolio.appspot.com",
+          projectId: "jabaseelan-portfolio"));
+  FirebaseStorage.instanceFor(bucket: "gs://jabaseelan-portfolio.appspot.com");
   runApp(MyApp());
 }
 

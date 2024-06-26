@@ -32,7 +32,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     on<FetchProjects>((event, emit) async {
       emit(ProjectLoading());
       try {
-        final projects = projectViewModel.getProjects();
+        final projects = await projectViewModel.getProjects();
         emit(ProjectLoaded(projects: projects));
       } catch (e) {
         emit(ProjectError(message: e.toString()));
