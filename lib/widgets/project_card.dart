@@ -4,7 +4,7 @@ import 'package:portfolio_stefun_1/main.dart';
 import 'package:portfolio_stefun_1/viewmodels/project_viewmodel.dart';
 import 'package:portfolio_stefun_1/widgets/common_widgets.dart';
 
-import '../blocs/projec_bloc_imports.dart';
+import '../blocs/project_part/projec_bloc_imports.dart';
 import '../models/project.dart';
 
 class ProjectCard extends StatelessWidget {

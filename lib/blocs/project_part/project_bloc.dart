@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../viewmodels/project_viewmodel.dart';
+import '../../viewmodels/project_viewmodel.dart';
 import 'project_events.dart';
 import 'project_state.dart';
 

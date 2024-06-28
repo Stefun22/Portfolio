@@ -1,4 +1,4 @@
-import '../models/project.dart';
+import '../../models/project.dart';
 
 abstract class ProjectState {}
 

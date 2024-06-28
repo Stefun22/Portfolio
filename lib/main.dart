@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:portfolio_stefun_1/blocs/project_events.dart';
+import 'package:portfolio_stefun_1/blocs/project_part/project_events.dart';
 
-import 'blocs/project_bloc.dart';
+import 'blocs/project_part/project_bloc.dart';
 import 'screens/home_screen.dart';
 
 Future<void> main() async {
