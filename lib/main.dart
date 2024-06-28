@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio_stefun_1/blocs/appbar_part/appbar_bloc.dart';
+import 'package:portfolio_stefun_1/blocs/appbar_part/appbar_events.dart';
 import 'package:portfolio_stefun_1/blocs/project_part/project_events.dart';
 
 import 'blocs/project_part/project_bloc.dart';
@@ -58,12 +60,13 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/home',
         routes: {
-          '/home': (context) => BlocProvider(
-              create: (ctx) => ProjectBloc()..add(FetchProjects()),
-              child: const HomeScreen()),
-          // '/about': (context) => AboutScreen(),
-          // '/projects': (context) => ProjectsScreen(),
-          // '/contact': (context) => ContactScreen(),
+          '/home': (context) => MultiBlocProvider(providers: <BlocProvider>[
+                BlocProvider<ProjectBloc>(
+                    create: (ctx) => ProjectBloc()..add(FetchProjects())),
+                BlocProvider<AppBarBloc>(
+                    create: (ctx) => AppBarBloc()
+                      ..add(ChangeSeletcion(selectedTile: "Home")))
+              ], child: const HomeScreen()),
         },
       ),
     );

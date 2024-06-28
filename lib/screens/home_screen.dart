@@ -2,12 +2,18 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio_stefun_1/constants.dart';
 import 'package:portfolio_stefun_1/extensions.dart';
 import 'package:portfolio_stefun_1/main.dart';
+import 'package:portfolio_stefun_1/widgets/AppBarWidgets.dart';
 import 'package:portfolio_stefun_1/widgets/animatedBacground.dart';
 import 'package:portfolio_stefun_1/widgets/project_card.dart';
 
+import '../blocs/appbar_part/appbar_bloc.dart';
+import '../blocs/appbar_part/appbar_events.dart';
+import '../blocs/appbar_part/appbar_state.dart';
+import '../widgets/common_widgets.dart';
 import '../widgets/footer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +23,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with GlobalKeys {
   PageController pgCont = PageController(initialPage: 0, viewportFraction: 0.3);
   @override
   void initState() {
@@ -33,52 +39,46 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  Map<String, GlobalKey> keyForFrames = {
-    "Home": GlobalKey(),
-    "Projects": GlobalKey(),
-    "Contact": GlobalKey()
-  };
-  static List<String> navBarContents = ["Home", "Projects", "Contact"];
+  // static List<String> navBarContents = ["Home", "Projects", "Contact"];
   String selectedTile = "Home";
   @override
   Widget build(BuildContext context) {
+    final AppBarBloc appBarBloc = BlocProvider.of(context);
     return PopScope(
       canPop: false,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green.withOpacity(0.5),
-          automaticallyImplyLeading: false,
-          title: const Text(
-            'J A B A S E E L A N   S',
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          actions: navBarContents.map((e) {
-            bool selected = e == selectedTile;
-            return TextButton(
-              style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(selected
-                      ? Colors.green.withOpacity(0.3)
-                      : Colors.transparent)),
-              onPressed: () {
-                selectedTile = e;
-                RenderObject? renderObject =
-                    keyForFrames[e]!.currentContext!.findRenderObject();
-                renderObject!.showOnScreen(
-                    duration: const Duration(seconds: 2),
-                    curve: Curves.fastOutSlowIn);
-                setState(() {});
-              },
-              child: Text(
-                e,
+            backgroundColor: Colors.green.withOpacity(0.5),
+            automaticallyImplyLeading: false,
+            title: const Text('J A B A S E E L A N   S',
                 style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5),
-              ),
-            );
-          }).toList(),
-        ),
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+            actions: [
+              BlocBuilder<AppBarBloc, AppBarState>(builder: (ctx, state) {
+                if (state is SeletedTile) {
+                  return Row(
+                      children: keyForFrames.keys.map((e) {
+                    return GestureDetector(
+                        onTap: () async {
+                          RenderObject? renderObject = keyForFrames[e]!
+                              .currentContext!
+                              .findRenderObject();
+                          if (renderObject != null) {
+                            renderObject.showOnScreen(
+                                duration: const Duration(seconds: 2),
+                                curve: Curves.fastOutSlowIn);
+                          }
+                          appBarBloc.add(ChangeSeletcion(selectedTile: e));
+                        },
+                        child: AppBarActions(
+                            title: e, notSelected: e != state.tile));
+                  }).toList());
+                }
+                return Container();
+              })
+            ]),
         body: AnimatedBackground(
           child: SingleChildScrollView(
             child: Column(
@@ -423,74 +423,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class HoverCard extends StatefulWidget {
-  final Widget child;
-
-  const HoverCard({Key? key, required this.child}) : super(key: key);
-
-  @override
-  _HoverCardState createState() => _HoverCardState();
-}
-
-class _HoverCardState extends State<HoverCard> {
-  bool _isHovered = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-              color: _isHovered ? Colors.white : Colors.transparent, width: 3),
-          boxShadow: _isHovered
-              ? [
-                  BoxShadow(
-                    color: Colors.transparent.withOpacity(0.5),
-                    blurRadius: 10,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 3),
-                  ),
-                ]
-              : [],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: widget.child,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MyBullet extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 20.0,
-      width: 20.0,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF1a043a), Colors.white],
-        ),
-        color: Colors.black,
-        shape: BoxShape.circle,
-      ),
-    );
-  }
+mixin GlobalKeys {
+  Map<String, GlobalKey> keyForFrames = {
+    "Home": GlobalKey(),
+    "Projects": GlobalKey(),
+    "Contact": GlobalKey()
+  };
 }
