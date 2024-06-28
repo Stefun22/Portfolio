@@ -3,9 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:portfolio_stefun_1/constants.dart';
+import 'package:portfolio_stefun_1/extensions.dart';
 import 'package:portfolio_stefun_1/main.dart';
-import 'package:portfolio_stefun_1/models/project.dart';
-import 'package:portfolio_stefun_1/viewmodels/project_viewmodel.dart';
 import 'package:portfolio_stefun_1/widgets/animatedBacground.dart';
 import 'package:portfolio_stefun_1/widgets/project_card.dart';
 
@@ -68,7 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 renderObject!.showOnScreen(
                     duration: const Duration(seconds: 2),
                     curve: Curves.fastOutSlowIn);
-                ProjectViewModel().getProjects();
                 setState(() {});
               },
               child: Text(
@@ -407,23 +405,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontSize: 22.adjust(),
                                       fontWeight: FontWeight.bold)),
                               SizedBox(height: Sizes.width * 0.01),
-                              Column(
-                                children: List.generate(1, (index) {
-                                  return ProjectCard(
-                                      project: Project(
-                                          order: 1,
-                                          title: "hCare",
-                                          description: [
-                                            "Utilizes Jitsi for seamless video calls, enabling users to consult with doctors remotely and discuss their health concerns effectively.",
-                                            "Integrates with Google Fit to track and display users' physical activity, heart rate, sleep patterns, and other health metrics for comprehensive health monitoring.",
-                                            "Provides users with insights into 16 vital health metrics, including blood pressure, cholesterol levels, BMI, and more, helping them track their health progress over time.",
-                                            "Offers secure payment processing through Razorpay, ensuring smooth transactions for medical consultations and other healthcare services within the app.",
-                                            "Sends push notifications to users, delivering timely reminders for upcoming appointments, personalized health tips, and important updates on their health status."
-                                          ],
-                                          company:
-                                              "https://indiahealthlink.com/wp-content/uploads/2023/03/logo-300x125.png"));
-                                }),
-                              )
+                              const ProjectCard()
                             ],
                           ),
                         ])),
