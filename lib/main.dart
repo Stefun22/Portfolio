@@ -2,12 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio_stefun_1/blocs/project_events.dart';
 
 import 'blocs/project_bloc.dart';
-import 'screens/about_screen.dart';
-import 'screens/contact_screen.dart';
 import 'screens/home_screen.dart';
-import 'screens/projects_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,10 +58,12 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/home',
         routes: {
-          '/home': (context) => HomeScreen(),
-          '/about': (context) => AboutScreen(),
-          '/projects': (context) => ProjectsScreen(),
-          '/contact': (context) => ContactScreen(),
+          '/home': (context) => BlocProvider(
+              create: (ctx) => ProjectBloc()..add(FetchProjects()),
+              child: const HomeScreen()),
+          // '/about': (context) => AboutScreen(),
+          // '/projects': (context) => ProjectsScreen(),
+          // '/contact': (context) => ContactScreen(),
         },
       ),
     );
@@ -73,19 +73,4 @@ class MyApp extends StatelessWidget {
 class Sizes {
   static double width = 0.0;
   static double height = 0.0;
-}
-
-extension DoubleExtension on int {
-  double adjust() {
-    final screenWidth =
-        MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
-    double interpolate(double x, double yMin) {
-      return (x / 1253.0) * this;
-    }
-
-    double adjustedFontSize = interpolate(screenWidth, toDouble());
-
-    // return adjustedFontSize;
-    return toDouble();
-  }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_stefun_1/extensions.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
   @override
@@ -22,28 +21,24 @@ class Footer extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               IconButton(
-                icon: networkImage(
-                    "https://cdn-icons-png.flaticon.com/128/1384/1384014.png"),
-                onPressed: () async {
-                  await launchUrl(
-                      "https://www.linkedin.com/in/stefun-s-2a6975228".toUri());
-                },
-              ),
+                  icon: networkImage(
+                      "https://cdn-icons-png.flaticon.com/128/1384/1384014.png"),
+                  onPressed: () async =>
+                      await "https://www.linkedin.com/in/stefun-s-2a6975228"
+                          .toUri()
+                          .launch()),
               IconButton(
-                icon: networkImage(
-                    "https://cdn-icons-png.flaticon.com/128/1384/1384007.png"),
-                onPressed: () async {
-                  await launchUrl("https://wa.me/919790164675".toUri());
-                },
-              ),
+                  icon: networkImage(
+                      "https://cdn-icons-png.flaticon.com/128/1384/1384007.png"),
+                  onPressed: () async =>
+                      await "https://wa.me/919790164675".toUri().launch()),
               IconButton(
-                icon: networkImage(
-                    "https://cdn-icons-png.flaticon.com/128/1384/1384015.png"),
-                onPressed: () async {
-                  await launchUrl(
-                      "https://www.instagram.com/s_t_e_f_u_n/".toUri());
-                },
-              ),
+                  icon: networkImage(
+                      "https://cdn-icons-png.flaticon.com/128/1384/1384015.png"),
+                  onPressed: () async =>
+                      "https://www.instagram.com/s_t_e_f_u_n/"
+                          .toUri()
+                          .launch()),
             ],
           ),
         ],

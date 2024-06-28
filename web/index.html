@@ -46,6 +46,7 @@
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
       // _flutter.loader.load({
+        let useHtml = true;
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
