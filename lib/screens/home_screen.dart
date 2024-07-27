@@ -95,9 +95,8 @@ class _HomeScreenState extends State<HomeScreen> with GlobalKeys {
                                   fontWeight: FontWeight.bold)),
                           SizedBox(height: Sizes.width * 0.01),
                           Text(
-                            '   Hi, I\'m Jabaseelan, a passionate Flutter developer with a keen eye for detail and a strong commitment to creating high-quality mobile applications. With a background in computer science and over 3 years of professional experience, I specialize in building cross-platform apps that are both functional and visually appealing.',
-                            style: TextStyle(fontSize: 18.adjust()),
-                          ),
+                              '   Hi, I\'m Jabaseelan, a passionate Flutter developer with a keen eye for detail and a strong commitment to creating high-quality mobile applications. With a background in computer science and over 3 years of professional experience, I specialize in building cross-platform apps that are both functional and visually appealing.',
+                              style: TextStyle(fontSize: 18.adjust())),
                           SizedBox(
                               key: keyForFrames["About"],
                               height: Sizes.width * 0.02),
@@ -107,9 +106,8 @@ class _HomeScreenState extends State<HomeScreen> with GlobalKeys {
                                   fontWeight: FontWeight.bold)),
                           SizedBox(height: Sizes.width * 0.01),
                           Text(
-                            "As a dedicated Flutter developer, I have worked on a variety of projects ranging from small startups to large-scale enterprises. My expertise lies in leveraging the full potential of the Flutter framework to deliver seamless user experiences on both iOS and Android platforms. I thrive in collaborative environments and am always eager to tackle new challenges and stay updated with the latest industry trends.",
-                            style: TextStyle(fontSize: 18.adjust()),
-                          ),
+                              "As a dedicated Flutter developer, I have worked on a variety of projects ranging from small startups to large-scale enterprises. My expertise lies in leveraging the full potential of the Flutter framework to deliver seamless user experiences on both iOS and Android platforms. I thrive in collaborative environments and am always eager to tackle new challenges and stay updated with the latest industry trends.",
+                              style: TextStyle(fontSize: 18.adjust())),
                           SizedBox(height: Sizes.width * 0.02),
                           Text('Technical Skills : ',
                               style: TextStyle(
@@ -147,32 +145,27 @@ class _HomeScreenState extends State<HomeScreen> with GlobalKeys {
                                                     SizedBox(
                                                         height:
                                                             Sizes.width * 0.01),
-                                                    Text(
-                                                      e["name"]!,
-                                                      style: TextStyle(
-                                                          fontSize:
-                                                              16.adjust()),
-                                                    ),
+                                                    Text(e["name"]!,
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                16.adjust())),
                                                     const Spacer(),
                                                     Align(
                                                       alignment:
                                                           Alignment.center,
                                                       child: SizedBox(
-                                                        height:
-                                                            Sizes.width / 5.5,
-                                                        width:
-                                                            Sizes.width / 5.5,
-                                                        child: Image.network(
-                                                            e["image"]!),
-                                                      ),
+                                                          height:
+                                                              Sizes.width / 5.5,
+                                                          width:
+                                                              Sizes.width / 5.5,
+                                                          child: Image.network(
+                                                              e["image"]!)),
                                                     ),
                                                     const Spacer(),
-                                                    Text(
-                                                      e["data"]!,
-                                                      style: TextStyle(
-                                                          fontSize:
-                                                              16.adjust()),
-                                                    ),
+                                                    Text(e["data"]!,
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                16.adjust())),
                                                   ]),
                                             ),
                                           ),
@@ -209,31 +202,27 @@ class _HomeScreenState extends State<HomeScreen> with GlobalKeys {
                                                     SizedBox(
                                                         height:
                                                             Sizes.width * 0.01),
-                                                    Text(
-                                                      e["name"]!,
-                                                      style: TextStyle(
-                                                          fontSize:
-                                                              16.adjust()),
-                                                    ),
+                                                    Text(e["name"]!,
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                16.adjust())),
                                                     const Spacer(),
                                                     Align(
                                                       alignment:
                                                           Alignment.center,
                                                       child: SizedBox(
-                                                        height:
-                                                            Sizes.width / 13,
-                                                        width: Sizes.width / 13,
-                                                        child: Image.network(
-                                                            e["image"]!),
-                                                      ),
+                                                          height:
+                                                              Sizes.width / 13,
+                                                          width:
+                                                              Sizes.width / 13,
+                                                          child: Image.network(
+                                                              e["image"]!)),
                                                     ),
                                                     const Spacer(),
-                                                    Text(
-                                                      e["data"]!,
-                                                      style: TextStyle(
-                                                          fontSize:
-                                                              16.adjust()),
-                                                    ),
+                                                    Text(e["data"]!,
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                16.adjust())),
                                                   ]),
                                             ),
                                           ),
@@ -256,9 +245,6 @@ class _HomeScreenState extends State<HomeScreen> with GlobalKeys {
                                 width: Sizes.width,
                                 alignment: Alignment.center,
                                 child: Column(
-                                  // crossAxisAlignment: WrapCrossAlignment.start,
-                                  // runSpacing: 22.adjust(),
-                                  // spacing: 22.adjust(),
                                   children: Constants.technical_skills
                                       .map(
                                         (e) => Padding(
@@ -297,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> with GlobalKeys {
                                                       ...e["skills"]
                                                           .map((ee) => ListTile(
                                                                 leading:
-                                                                    MyBullet(),
+                                                                    const MyBullet(),
                                                                 titleAlignment:
                                                                     ListTileTitleAlignment
                                                                         .center,
@@ -368,7 +354,8 @@ class _HomeScreenState extends State<HomeScreen> with GlobalKeys {
                                                           Sizes.width * 0.01),
                                                   ...e["skills"]
                                                       .map((ee) => ListTile(
-                                                            leading: MyBullet(),
+                                                            leading:
+                                                                const MyBullet(),
                                                             titleAlignment:
                                                                 ListTileTitleAlignment
                                                                     .center,
